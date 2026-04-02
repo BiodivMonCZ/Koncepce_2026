@@ -15,12 +15,48 @@ library(RANN)
 library(ggpubr)
 library(cowplot)
 
-setwd("C:/Users/lucie.zemanova/Documents/lucie.zemanova/Ryby_Boris/Aktualizace_Koncepce_2025/pr_5/DCI_NOVA_DATA_PAROVANI")
-
 shape_river <- st_read("DCI/input/Labe_riverconn.shp")
 shape_dams  <- st_read("DCI/input/bariery_labe_2025.shp")
 
 shape_river_small <- shape_river
 
 windows()
+
+# Simplify river shapefile
+shape_river_simple <- shape_river_small %>%
+  st_as_sf %>%
+  st_union()
+
+# Convert shapefile to point object
+river_to_points <- shape_river_simple %>%
+  st_as_sf %>%
+  st_cast("POINT") %>%
+  mutate(id = 1:nrow(.))
+
+joins_selection <- river_to_points %>%
+  st_equals() %>%
+  Filter(function(x){length(x) > 2}, .) %>%
+  lapply(., FUN = min) %>%
+  unlist() %>%
+  unique()
+
+river_joins <- river_to_points %>% 
+  filter(id %in% joins_selection)
+
+shape_river_simplified <- lwgeom::st_split(shape_river_simple, river_joins) %>%
+  st_collection_extract(.,"LINESTRING") %>%
+  data.frame(id = 1:length(.), geometry = .) %>%
+  st_as_sf() %>%
+  mutate(length = st_length(.))
+
+ggplot() +
+  coord_fixed() +
+  ggspatial::layer_spatial(shape_river_simplified, aes(color = id))+
+  scale_color_viridis(direction = -1, name= "Reach ID") +
+  ggspatial::layer_spatial(river_joins, shape = 1)+
+  theme_minimal() +
+  theme(legend.position = "bottom")+
+  ggspatial::annotation_scale(location = "bl", style = "ticks") +
+  ggspatial::annotation_north_arrow(location = "br")+
+  labs(caption = "Hollow points are the position of the junctions")
 
