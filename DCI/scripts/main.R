@@ -516,3 +516,4 @@ ggplot() +
   ggspatial::annotation_scale(location = "bl", style = "ticks") +
   ggspatial::annotation_north_arrow(location = "br")+
   labs(caption = "Prostupnost bariér")
+
