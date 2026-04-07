@@ -3,7 +3,7 @@ Podpůrný repozitář pro zpracování dat v rámci Aktualizace Koncepce zprost
 
 ## DCI
 - vstupní a výstupní data a výsledky z výpočtu indexu dendritické konektivity (DCI) prostřednictvím R-package Riverconn (více viz Změnový list)
-- 
+
 ### data
 - potřebné vrstvy k výpočtu DCI pro povodí Labe, Dunaje (Moravy) a Odry ke stažení v zip formátu
 
