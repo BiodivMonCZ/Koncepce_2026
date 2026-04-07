@@ -1,0 +1,260 @@
+Metadata k datové sadì – Aktualizace Koncepce (2026)
+
+vrstvy:
+Vymezeni_migracne_vyznamnych_vodnich_toku.shp
+Vrstva_vsech_prekazek_na_koncepci_final.shp
+Vrstva_prioritnich_prekazek_final.shp
+Linie_prostupnost_final.shp
+Uzly_prostupnost_final.shp
+
+
+## Vrstva
+Vymezeni_migracne_vyznamnych_vodnich_toku.shp
+
+## Popis
+Liniová vrstva migraènì vıznamnıch vodních tokù upravená pro potøeby aktualizace Koncepce zprùchodnìní øíèní sítì ÈR (2026).
+
+## Zdroj dat
+ZABAGED – VodniTok.shp (verze 2023)  
+Vrstva koridory_koncepce_2020.shp
+
+## Zpracování
+Pùvodní vrstva vymezení migraèních koridorù z roku 2020 nemìla topologickou vazbu na ádnou referenèní liniovou vrstvu. Nová vrstva proto pøejímá vymezení a atributy
+pùvodní vrstvy a zároveò je topologicky sjednocena s referenèní vrstvou VodniTok.shp (ZABAGED, 2023).
+
+Vrstva ZABAGED (2023) byla zvolena s ohledem na projekt Pasportizace, pro nìj pøedstavuje referenèní liniovou vrstvu.
+
+Oproti vymezení z roku 2020 byla vrstva rozšíøena o nové migraènì vıznamné toky: Poleènice, Vìtší Vltavice, Vltava nad VN Lipno, Studená Vltava a Teplá Vltava.
+
+Vrstva je topologicky konzistentní s pøesnımi napojeními vodních tokù a po úpravì (odstranìní smyèek, nenapojenıch úsekù tokù, pøíp. doplnìní napojení vybranıch tokù
+z vrstvy VodniTok.shp mimo pùvodní koridory, doplnìní outletù, rozpuštìní linií a identifikace uzlù v bodech soutokù) umoòuje vyuití pro síové modelování
+podélné konektivity (napø. pomocí balíèku riverconn v prostøedí R).
+
+## Atributy
+fid - identifikátor linie
+SHAPE_LEN - délka linie v metrech
+NAZEV_TOK - název toku dle pùvodní vrstvy z roku 2020
+KONCEPCE - kategorie vıznamnosti migraèního koridoru
+POVODI - název povodí I. øádu
+KONC_KOD - kategorie vıznamnosti migraèního koridoru v podobì písmenného kódu (A = mezinárodní, B = národní, C = regionální)
+DELKA - délka linie vodního toku v kilometrech
+IDVT - identifikátor vodního toku dle Cevro
+
+## Pouití
+Vrstva vymezuje migraènì vıznamné koridory v ÈR podle kategorií vıznamnosti: mezinárodní, národní a regionální.
+
+## Poznámka
+Podrobnı popis zpracování je uveden ve zmìnovém listu.
+
+## Autor
+Lucie Zemanová, AOPK ÈR (2026)
+
+
+## Vrstva
+Vrstva_vsech_prekazek_na_koncepci_final.shp
+
+## Popis
+Bodová vrstva migraèních pøekáek na migraènì vıznamnıch vodních tocích pro potøeby aktualizace Koncepce zprùchodnìní øíèní sítì ÈR (2026).
+
+## Zdroj dat
+Pasportizace – projekt Párování bariér z Fragmentace na Pasportizaci (https://experience.arcgis.com/experience/fceb709840ed434099b84f29d52fccfb), export AOPK ÈR 2026
+Fragmentace - mapování bariér v rámci projektu Fragmentace (nespárované èi nerevidované bariéry)
+
+## Zpracování
+Pùvodní vrstva migraèních pøekáek z roku 2020 obsahovala ménì pøekáek. Mapováním v rámci projektu Pasportizace vodních tokù bylo domapováno ca 900 migraèních pøekáek
+oproti pøedchozí verzi.
+
+## Atributy
+Vrstva obsahuje tyto atributy:
+DBID - identifikátor pøekáky v projektu Fragmentace (chybí u nespárovanıch pøekáek mapovanıch v rámci projektu Pasportizace)
+TYP_BARIER - kategorie pøekáky podle daného projektu mapování (liší se mezi projekty Pasportizace a Fragmentace)
+NAZEV_TOK - název toku, na kterém se pøekáka nachází
+RICNI_KM - øíèní kilometr daného toku v místì vıskytu pøekáky dle projektu Pasportizace (u nespárovanıch pøekáek dle projektu Fragmentace, chybí u ad hoc pøidanıch pøekáek
+mimo mapování obou projektù)
+WGS_Y - souøadnice WGS-84 EPSG: 4326 zemìpisné délky
+WGS_X - souøadnice WGS-84 EPSG: 4326 zemìpisné šíøky
+STAV - stav migraèní pøekáky v dobì mapování
+UCEL - známı úèel pøekáky v dobì mapování
+POZNAMKA - pøípadná poznámka mapovatele èi odpovìdného pracovníka regionálního pracovištì
+GLOBALID - identifikátor bariéry (Pasportizace, Fragmentace, u novì pøidanıch pøekáek mimo mapování s hodnotou NULL)
+IDVT - identifikátor vodní linie
+MIGR_OBJEKT - migraèné objekt u dané pøekáky (napø. rybí pøechod)
+ID_prek - identifikátor pøekáky v projektu Pasportizace (chybí u pøekáek, kde byla primárním zdrojem Fragmentace a u novì pøidanıch pøekáek mimo mapování)
+MP_do_2020 - migraèní prostupnost pøed rokem 2020 - rekonstruováno pouze pro prioritní pøekáky (dle dostupnıch zdrojù)
+MP_2020 - migraèní prostupnost k roku 2020 - známá pouze u prioritních pøekáek (dle dostupnıch zdrojù)
+MP_2025 - migraèní prostupnost známá k roku 2025 - odpovídá souèasnému stavu dle dostupnıch zdrojù
+MP_2027 - migraèní prostupnost vycházející ze stavu známého k roku 2025 a upraveného na prostupnı u migraèních pøekáek stanovenıch jako prioritní v rámci aktualizace
+          Koncepce 2020
+MP_plan - migraèní prostupnost vycházející ze stavu známého k roku 2025 a upraveného na prostupnı u všech migraèních pøekáek stanovenıch jako prioritní v rámci souèasné
+          aktualizace Koncepce 2026
+ID - identifikátor pøekáky slouèenı z DBID, v pøípadì chybìjícího DBID nahrazen ID_prek, chybí u zaniklıch pøekáek pøidanıch pouze pro potøeby zobrazení odstranìnıch pøekáek
+Zanikla_prek - zaniklé pøekáky (hodnota 'ano')
+
+## Pouití
+Vrstva je urèena k identifikaci migraèních pøekáek na vıznamnıch migraèních koridorech a obsahuje údaje o prostupnosti pøekáek.
+
+## Poznámka
+Podrobnı popis zpracování je uveden ve zmìnovém listu.
+
+## Autor
+Lucie Zemanová, AOPK ÈR (2026)
+
+
+## Vrstva
+Vrstva_prioritnich_prekazek_final.shp
+
+## Popis
+Bodová vrstva prioritních pøekáek s plánovanım zprostupnìním upravená pro potøeby aktualizace Koncepce zprùchodnìní øíèní sítì ÈR (2026).
+
+## Zdroj dat
+Seznam prioritních pøekáek - pøíloha 8 a 11 Aktualizace Koncepce 2020
+Vrstva_vsech_prekazek_na_koncepci.shp - topologie prioritních bariér zaloena na pøiøazení prioritní bariéry k patøièné pøekáce vrstvy všech pøekáek
+
+## Zpracování
+Pùvodní seznam prioritních pøekáek (Aktualizace Koncepce 2020) mìl formu excelovské tabulky bez geometrie. Pùvodní prioritní pøekáky byly identifikovány a spárovány
+s pøíslušnımi pøekákami aktuální vrstvy, jejich geometrie byla pøevzata do této vrstvy. Pùvodní seznam prioritních pøekáek (2020) obsahoval 176 pøekáek a rámci 
+Aktualizace Koncepce 2026 byl rozšíøen na poèet 270. Dùvodem rozšíøení seznamu bylo doplnìní migraèních pøekáek leících v úsecích mezi pùvodnì navrenımi
+prioritními bariérami tak, aby došlo k zcelení zprostupnìnıch úsekù.
+
+## Atributy
+ID - identifikátor pøekáky ve Vrstva_vsech_prekazek_na_koncepci.shp
+ID_prior - ID prioritní pøekáky v této vrstvì
+nazev_prof - název prioritní pøekáky (profilu)
+nazev_toku - název vodního toku, na kterém se pøekáka nachází
+ricni_km - øíèní kilometr vodního toku pøevzatı z Vrstva_vsech_prekazek_na_koncepci.shp (dle projektù Pasportizace a Fragmentace)
+prior_2027 - pøekáky urèené k zprostupnìní v tomto období (do roku 2027), tedy pøekáky s nejvyšší prioritou
+priorita_s - priorita vodních správcù, tedy pøekáky stanovené jako prioritní pøíslušnımi vodními správci
+priorita_oc - priorita ochrany pøírody, tedy pøekáky stanovené jako prioritní orgány ochrany pøírody
+prinos_konc - d-index dané pøekáky stanovenı vıpoètem dendritického indexu konektivity a prioritizace bariér (Riverconn package, podrobnosti viz Zmìnovı list)
+idealni_zp - d-index dané pøekáky stanovenı vıpoètem dendritického indexu konektivity pøi ideálním poøadí zprostupòování pøekáek (podrobnosti viz Zmìnovı list)
+priorita_r - priorita Regionálních pracovištì, tedy pøekáky stanovené jako prioritní pøíslušnımi regionálními pracovišti ochrany pøírody (RP AOPK ÈR)
+Prost_2025 - prostupnost pøekáky k roku 2025 dle dostupnıch zdrojù
+RP_AOPK - pøíslušné regionální pracovištì, na jeho území se prioritní pøekáka nachází
+podnik_pov - pøíslušnı vodní správce (Správa Povodí)
+
+## Pouití
+Vrstva vymezuje prioritní pøekáky stanovené k zprostupnìní v tomto a dalších plánovacích obdobích
+
+## Poznámka
+Podrobnı popis zpracování je uveden ve zmìnovém listu.
+
+## Autor
+Lucie Zemanová, AOPK ÈR (2026)
+
+
+## Vrstva
+Vrstva_prioritnich_prekazek_final.shp
+
+## Popis
+Bodová vrstva prioritních pøekáek s plánovanım zprostupnìním upravená pro potøeby aktualizace Koncepce zprùchodnìní øíèní sítì ÈR (2026).
+
+## Zdroj dat
+Seznam prioritních pøekáek - pøíloha 8 a 11 Aktualizace Koncepce 2020
+Vrstva_vsech_prekazek_na_koncepci.shp - topologie prioritních bariér zaloena na pøiøazení prioritní bariéry k patøièné pøekáce vrstvy všech pøekáek
+
+## Zpracování
+Pùvodní seznam prioritních pøekáek (Aktualizace Koncepce 2020) mìl formu excelovské tabulky bez geometrie. Pùvodní prioritní pøekáky byly identifikovány a spárovány
+s pøíslušnımi pøekákami aktuální vrstvy, jejich geometrie byla pøevzata do této vrstvy. Pùvodní seznam prioritních pøekáek (2020) obsahoval 176 pøekáek a rámci 
+Aktualizace Koncepce 2026 byl rozšíøen na poèet 270. Dùvodem rozšíøení seznamu bylo doplnìní migraèních pøekáek leících v úsecích mezi pùvodnì navrenımi
+prioritními bariérami tak, aby došlo k zcelení zprostupnìnıch úsekù.
+
+## Atributy
+ID - identifikátor pøekáky ve Vrstva_vsech_prekazek_na_koncepci.shp
+ID_prior - ID prioritní pøekáky v této vrstvì
+nazev_prof - název prioritní pøekáky (profilu)
+nazev_toku - název vodního toku, na kterém se pøekáka nachází
+ricni_km - øíèní kilometr vodního toku pøevzatı z Vrstva_vsech_prekazek_na_koncepci.shp (dle projektù Pasportizace a Fragmentace)
+prior_2027 - pøekáky urèené k zprostupnìní v tomto období (do roku 2027), tedy pøekáky s nejvyšší prioritou
+priorita_s - priorita vodních správcù, tedy pøekáky stanovené jako prioritní pøíslušnımi vodními správci
+priorita_oc - priorita ochrany pøírody, tedy pøekáky stanovené jako prioritní orgány ochrany pøírody
+prinos_konc - d-index dané pøekáky stanovenı vıpoètem dendritického indexu konektivity a prioritizace bariér (Riverconn package, podrobnosti viz Zmìnovı list)
+idealni_zp - d-index dané pøekáky stanovenı vıpoètem dendritického indexu konektivity pøi ideálním poøadí zprostupòování pøekáek (podrobnosti viz Zmìnovı list)
+priorita_r - priorita Regionálních pracovištì, tedy pøekáky stanovené jako prioritní pøíslušnımi regionálními pracovišti ochrany pøírody (RP AOPK ÈR)
+Prost_2025 - prostupnost pøekáky k roku 2025 dle dostupnıch zdrojù
+RP_AOPK - pøíslušné regionální pracovištì, na jeho území se prioritní pøekáka nachází
+podnik_pov - pøíslušnı vodní správce (Správa Povodí)
+
+## Pouití
+Vrstva vymezuje prioritní pøekáky stanovené k zprostupnìní v tomto a dalších plánovacích obdobích
+
+## Poznámka
+Podrobnı popis zpracování je uveden ve zmìnovém listu.
+
+## Autor
+Lucie Zemanová, AOPK ÈR (2026)
+
+
+## Vrstva
+Linie_prostupnost_final.shp
+
+## Popis
+Liniová vrstva prostupnosti mezi migraèními pøekákami. Linie zaèínají a konèí v bodech migraèních pøekáek nebo soutokù. Prostupnost linií je nastavena dle prostupnosti
+v uzlech: linie mezi dvìma neprostupnımi pøekákami je povaována za neprostupnou, ostatní linie nastaveny jako prostupné. Prostupnost je nastavena pro rùzná období (více
+viz Atributy a Zmìnovı list).
+
+## Zdroj dat
+Zdrojovımi vrstvami byly Vymezeni_migracne_vyznamnych_vodnich_toku.shp a Vrstva_vsech_prekazek_na_koncepci_final.shp.
+
+## Zpracování
+Liniová Vrstva_migracne_vyznamnych_toku.shp byla rozpuštìna do jediného prvku a dále rozdìlena pouze v uzlech soutokù (Identify network nodes). Vrstva_vsech_prekazek_na_koncepci.shp
+byla snapnuta k takto vzniklé liniové vrstvì a vrstva byla dále rozdìlena v bodech snapnutıch pøekáek. Znovu byly identifikovány uzly a dle prostupnosti v uzlech 
+nastavena prostupnost linií.
+
+## Atributy
+fid - identifikátor linie
+SHAPE_LEN - délka linie v metrech
+NODEA - identifikátor uzlu A (Identify network nodes)
+NODEB - identifikátor uzlu B (Identify network nodes)
+AMP_2020 - prostupnost daného uzlu A do roku 2020
+AMP_2025 - prostupnost daného uzlu A - známı stav k roku 2025
+AMP_plan - prostupnost daného uzlu A za stavu, kdy budou zprostupnìny všechny prioritní migraèní pøekáky (u prioritních pøekáek stanovena prostupnost 'ano', ostatní
+dle známého stavu k roku 2025)
+BMP_2020 - prostupnost daného uzlu B do roku 2020
+BMP_2025 - prostupnost daného uzlu B - známı stav k roku 2025
+BMP_plan - prostupnost daného uzlu B za stavu, kdy budou zprostupnìny všechny prioritní migraèní pøekáky (u prioritních pøekáek stanovena prostupnost 'ano', ostatní
+dle známého stavu k roku 2025)
+MP_2020 - prostupnost daného liniového úseku mezi uzly do roku 2020
+BMP_2025 - prostupnost daného liniového úseku mezi uzly - známı stav k roku 2025
+BMP_plan - prostupnost daného liniového úseku mezi uzly za stavu, kdy budou zprostupnìny všechny prioritní migraèní pøekáky (u prioritních pøekáek stanovena prostupnost 'ano', ostatní
+dle známého stavu k roku 2025)
+
+## Pouití
+Vrstva slouí k zobrazení prostupnosti liniovıch úsekù Koncepce v kombinaci s následující vrstvou Uzly_prostupnost_final.shp
+
+## Poznámka
+Podrobnı popis zpracování je uveden ve zmìnovém listu.
+
+## Autor
+Lucie Zemanová, AOPK ÈR (2026)
+
+
+## Vrstva
+Uzly_prostupnost_final.shp
+
+## Popis
+Bodová vrstva uzlù rozdìlujících linie v bodech soutokù a migraèních pøekáek s nastavenou prostupnosti dle prostupnosti pøekáek pro rùzná plánovací období (více
+viz Atributy a Zmìnovı list).
+
+## Zdroj dat
+Zdrojovımi vrstvami byly Vymezeni_migracne_vyznamnych_vodnich_toku.shp a Vrstva_vsech_prekazek_na_koncepci_final.shp.
+
+## Zpracování
+Vrstva_vsech_prekazek_na_koncepci.shp byla snapnuta k takto vzniklé liniové vrstvì a vrstva byla dále rozdìlena v bodech snapnutıch pøekáek. 
+Znovu byly identifikovány uzly, tyto uzly byly prostorovì propojeny s buffery okolo migraèních pøekáek a pøipojeny atributy prostupnosti pøekáek v rùznıch plánovacích
+obdobích.
+
+## Atributy
+GID - identifikátor uzlu
+MP_2020 - prostupnost daného uzlu do roku 2020
+MP_2025 - prostupnost daného uzlu - známı stav k roku 2025
+MP_plan - prostupnost daného uzlu za stavu, kdy budou zprostupnìny všechny prioritní migraèní pøekáky (u prioritních pøekáek stanovena prostupnost 'ano', ostatní
+dle známého stavu k roku 2025)
+
+## Pouití
+Vrstva slouí k zobrazení prostupnosti liniové vrstvy Koncepce a tvoøí vizuální pøekáky liniích vsrtvy Linie_prostupnost_final.shp
+
+## Poznámka
+Podrobnı popis zpracování je uveden ve zmìnovém listu.
+
+## Autor
+Lucie Zemanová, AOPK ÈR (2026)
