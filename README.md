@@ -25,6 +25,12 @@ načtení dat, vytvoření rivergraphu, výpočet indexu a prioritizaci bariér 
 ## Prilohy_vrstvy
 - GIS vrstvy, jež jsou součástí Aktualizace Koncepce a metadata
 
+## Typologie_OOV
+- zastoupení typů vodních toků dle Janáč a kol. 2019: Metodika hodnocení ekologického stavu útvarů povrchových vod tekoucích (kategorie řeka) pomocí biologické složky ryby
+- graf zastoupení jednotlivých typů toků v Aktualizaci koncepce 2026 (v km)
+- layout zastoupení jednotlivých typů toků
+- lioniová vrstva úseků toků dělených podle Strahlerova pořadí a kategorie nadmořské výšky a klasifikovaná dle Janáč a kol. 2019
+
 ## Zmenovy_list
 - Změnový list obsahující popis metodiky tvorby a zpracování vrstev, změny oproti Aktualizaci 2020 a výpočty DCI a prioritizace bariér
 
